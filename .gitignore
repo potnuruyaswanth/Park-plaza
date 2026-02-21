@@ -1,0 +1,36 @@
+# Dependencies
+/node_modules
+npm-debug.log
+npm-error.log
+yarn-error.log
+yarn-debug.log
+pnpm-lock.yaml
+
+# Environment variables (SENSITIVE - DO NOT COMMIT)
+.env
+.env.local
+.env.*.local
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build outputs
+/client/dist
+/server/build
+*.log
+
+# Runtime data
+/server/invoices/*
+/server/receipts/*
+!server/invoices/.gitkeep
+!server/receipts/.gitkeep
+
+# OS files
+.DS_Store
+*.pdb

@@ -1,0 +1,36 @@
+export const USER_ROLES = {
+  USER: 'USER',
+  EMPLOYEE: 'EMPLOYEE',
+  ADMIN: 'ADMIN'
+};
+
+export const BOOKING_STATUS = {
+  PENDING: 'PENDING',
+  INSPECTED: 'INSPECTED',
+  INVOICED: 'INVOICED',
+  PAID: 'PAID',
+  COMPLETED: 'COMPLETED'
+};
+
+export const SERVICE_TYPE = {
+  PARKING: 'PARKING',
+  WASH: 'WASH',
+  REPAIR: 'REPAIR'
+};
+
+export const INVOICE_STATUS = {
+  GENERATED: 'GENERATED',
+  ACCEPTED: 'ACCEPTED',
+  PAID: 'PAID'
+};
+
+export const PARKING_RATES = {
+  HOURLY: 50,
+  DAILY: 300,
+  WEEKLY: 1500
+};
+
+export const JWT_EXPIRY = {
+  ACCESS: '15m',
+  REFRESH: '7d'
+};
