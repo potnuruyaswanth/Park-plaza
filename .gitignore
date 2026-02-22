@@ -1,15 +1,18 @@
 # Dependencies
 /node_modules
-npm-debug.log
-npm-error.log
-yarn-error.log
-yarn-debug.log
+npm-debug.log*
+npm-error.log*
+yarn-error.log*
+yarn-debug.log*
 pnpm-lock.yaml
+package-lock.json
+yarn.lock
 
 # Environment variables (SENSITIVE - DO NOT COMMIT)
 .env
 .env.local
 .env.*.local
+.env.example (only for reference, keep in repo)
 
 # IDE & Editor
 .vscode/
@@ -19,15 +22,41 @@ pnpm-lock.yaml
 *~
 .DS_Store
 Thumbs.db
+.sublime-workspace
+.sublime-project
 
 # Build outputs
 /client/dist
+/client/build
 /server/build
+/server/dist
 *.log
+logs/
+*.tgz
 
 # Runtime data
 /server/invoices/*
 /server/receipts/*
+temp/
+tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+*.exe
+*.dll
+*.so
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+.eslintcache
+node_modules/
+*.pid
+*.pid.lock
 !server/invoices/.gitkeep
 !server/receipts/.gitkeep
 
