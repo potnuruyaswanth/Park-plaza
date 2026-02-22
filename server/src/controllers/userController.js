@@ -3,7 +3,7 @@ import Invoice from '../models/Invoice.js';
 import Payment from '../models/Payment.js';
 import Showroom from '../models/Showroom.js';
 import User from '../models/User.js';
-import { BOOKING_STATUS, PARKING_RATES } from '../config/constants.js';
+import { BOOKING_STATUS, PARKING_RATES, INVOICE_STATUS } from '../config/constants.js';
 import { calculateDistance } from '../utils/distance.js';
 import razorpayInstance from '../config/razorpay.js';
 import crypto from 'crypto';
@@ -86,13 +86,32 @@ export const bookService = async (req, res) => {
       return res.status(400).json({ message: 'Please provide all required fields' });
     }
 
-    // Check showroom exists
+    // Check showroom exists and has available slots
     const showroom = await Showroom.findById(showroomId);
     if (!showroom) {
       return res.status(404).json({ message: 'Showroom not found' });
     }
 
-    // Calculate estimated cost
+    // Check slot availability
+    if (showroom.availableSlots <= 0) {
+      return res.status(400).json({ 
+        message: '❌ Sorry, no slots are available at this showroom right now. Please try again later.',
+        slotsAvailable: false 
+      });
+    }
+
+    // Find employee assigned to this showroom
+    const employee = await User.findOne({ 
+      showroomId, 
+      role: 'EMPLOYEE',
+      isActive: true
+    });
+
+    if (!employee) {
+      return res.status(500).json({ message: 'No employee assigned to this showroom' });
+    }
+
+    // Calculate estimated cost based on duration
     const rates = {
       HOURLY: PARKING_RATES.HOURLY,
       DAILY: PARKING_RATES.DAILY,
@@ -100,6 +119,10 @@ export const bookService = async (req, res) => {
     };
     const estimatedCost = rates[duration] || PARKING_RATES.HOURLY;
 
+    // Assign a slot number (from nextSlot variable or just count taken slots)
+    const nextSlotNumber = showroom.totalParkingSlots - showroom.availableSlots + 1;
+
+    // Create booking with slot assignment
     const booking = await Booking.create({
       userId,
       showroomId,
@@ -110,16 +133,57 @@ export const bookService = async (req, res) => {
       estimatedCost,
       durationStartDate,
       durationEndDate,
-      status: BOOKING_STATUS.PENDING
+      status: BOOKING_STATUS.PENDING,
+      slotNumber: nextSlotNumber,
+      employeeId: employee._id
     });
 
-    await booking.populate('showroomId userId');
+    // Update showroom - decrease available slots by 1
+    showroom.availableSlots = Math.max(0, showroom.availableSlots - 1);
+    await showroom.save();
+
+    // Auto-create invoice immediately
+    const invoice = await Invoice.create({
+      userId,
+      bookingId: booking._id,
+      showroomId,
+      employeeId: employee._id,
+      invoiceNumber: `INV-${Date.now()}`,
+      itemDetails: [{
+        description: `${serviceType} Service (${duration})`,
+        quantity: 1,
+        rate: estimatedCost,
+        amount: estimatedCost
+      }],
+      totalAmount: estimatedCost,
+      status: INVOICE_STATUS.GENERATED,
+      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Due in 7 days
+    });
+
+    // Auto-create payment record in PENDING status
+    const payment = await Payment.create({
+      userId,
+      bookingId: booking._id,
+      invoiceId: invoice._id,
+      showroomId,
+      amount: estimatedCost,
+      status: 'PENDING'
+    });
+
+    // Populate relationships for response
+    await booking.populate(['showroomId', 'userId', 'employeeId']);
 
     res.status(201).json({
-      message: 'Booking created successfully',
-      booking
+      message: '✅ Booking confirmed! Slot #' + nextSlotNumber + ' assigned. Invoice created.',
+      booking: {
+        ...booking.toObject(),
+        slotNumber: nextSlotNumber,
+        invoice: invoice._id,
+        payment: payment._id
+      }
     });
   } catch (error) {
+    console.error('Booking error:', error);
     res.status(500).json({ message: error.message });
   }
 };

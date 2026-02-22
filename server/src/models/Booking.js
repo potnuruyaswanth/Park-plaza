@@ -13,6 +13,14 @@ const bookingSchema = new mongoose.Schema(
       ref: 'Showroom',
       required: true
     },
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    slotNumber: {
+      type: Number,
+      description: 'Assigned parking/service slot number'
+    },
     carDetails: {
       carNumber: {
         type: String,

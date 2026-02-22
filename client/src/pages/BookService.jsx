@@ -20,6 +20,7 @@ const BookService = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +30,7 @@ const BookService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess(null);
     setLoading(true);
 
     if (!showroom?._id) {
@@ -44,7 +46,7 @@ const BookService = () => {
     }
 
     try {
-      await api.post('/user/book', {
+      const response = await api.post('/user/bookings', {
         showroomId: showroom._id,
         serviceType: formData.serviceType,
         duration: formData.duration,
@@ -56,7 +58,18 @@ const BookService = () => {
         description: formData.description
       });
 
-      navigate('/bookings');
+      // Show success message with booking details
+      const booking = response.data.booking;
+      setSuccess({
+        message: response.data.message,
+        slotNumber: booking.slotNumber,
+        bookingId: booking._id
+      });
+
+      // Redirect after 2.5 seconds
+      setTimeout(() => {
+        navigate('/bookings');
+      }, 2500);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create booking');
     } finally {
@@ -78,6 +91,25 @@ const BookService = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 py-8">
+      {/* Success Modal */}
+      {success && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <Card className="max-w-md text-center">
+            <div className="text-6xl mb-4">✅</div>
+            <h2 className="text-2xl font-bold text-green-600 mb-2">Booking Confirmed!</h2>
+            <p className="text-gray-700 mb-4">{success.message}</p>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+              <p className="text-sm text-gray-600 mb-1">Slot Number</p>
+              <p className="text-3xl font-bold text-green-600">#{success.slotNumber}</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-4">Redirecting to your bookings...</p>
+            <div className="flex justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+            </div>
+          </Card>
+        </div>
+      )}
+
       <div className="max-w-3xl mx-auto px-4">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-6 py-5 mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Book Service</h1>

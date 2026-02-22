@@ -5,22 +5,26 @@ import Card from '../components/Card';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading, accessToken } = useAuth();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!authLoading && user && accessToken) {
+      fetchProfile();
+    }
+  }, [user, authLoading, accessToken]);
 
   const fetchProfile = async () => {
     try {
       setLoading(true);
+      setError('');
       const endpoint = user?.role === 'EMPLOYEE' ? '/employee/profile' : '/user/profile';
       const response = await api.get(endpoint);
       setProfile(response.data.user);
     } catch (err) {
+      console.error('Profile fetch error:', err.response?.status, err.response?.data);
       setError(err.response?.data?.message || 'Failed to fetch profile');
     } finally {
       setLoading(false);

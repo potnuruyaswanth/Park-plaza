@@ -23,31 +23,35 @@ const EditProfile = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading, accessToken } = useAuth();
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!authLoading && user && accessToken) {
+      fetchProfile();
+    }
+  }, [user, authLoading, accessToken]);
 
   const fetchProfile = async () => {
     try {
       setLoading(true);
+      setError('');
       const endpoint = user?.role === 'EMPLOYEE' ? '/employee/profile' : '/user/profile';
       const response = await api.get(endpoint);
-      const user = response.data.user;
+      const profileData = response.data.user;
       
       setFormData({
-        name: user.name || '',
-        phone: user.phone || '',
+        name: profileData.name || '',
+        phone: profileData.phone || '',
         address: {
-          street: user.address?.street || '',
-          city: user.address?.city || '',
-          state: user.address?.state || '',
-          zipCode: user.address?.zipCode || '',
-          country: user.address?.country || ''
+          street: profileData.address?.street || '',
+          city: profileData.address?.city || '',
+          state: profileData.address?.state || '',
+          zipCode: profileData.address?.zipCode || '',
+          country: profileData.address?.country || ''
         }
       });
     } catch (err) {
+      console.error('Profile fetch error:', err.response?.status, err.response?.data);
       setError(err.response?.data?.message || 'Failed to fetch profile');
     } finally {
       setLoading(false);

@@ -12,7 +12,8 @@ import {
   getShowroomPendingPayments,
   markPaymentAsPaidByEmployee,
   getEmployeeProfile,
-  updateEmployeeProfile
+  updateEmployeeProfile,
+  markWorkAsDone
 } from '../controllers/employeeController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 import roleMiddleware from '../middleware/roleMiddleware.js';
@@ -28,6 +29,7 @@ router.get('/showrooms/:showroomId/bookings', getShowroomBookings);
 router.get('/bookings/:bookingId', getBookingDetailsForEmployee);
 router.put('/bookings/:bookingId/inspect', inspectCar);
 router.put('/bookings/:bookingId/status', updateBookingStatus);
+router.put('/bookings/:bookingId/mark-done', markWorkAsDone);
 
 // Profile routes
 router.get('/profile', getEmployeeProfile);
