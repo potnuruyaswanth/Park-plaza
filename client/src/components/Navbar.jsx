@@ -11,14 +11,6 @@ export default function Navbar() {
           <span className="logo-emoji">🚗</span>
           <span className="logo-text">Park Plaza</span>
         </div>
-        <div className="navbar-buttons">
-          <button 
-            className="btn btn-primary-nav"
-            onClick={() => navigate('/auth')}
-          >
-            🔐 Login / Register
-          </button>
-        </div>
       </div>
     </nav>
   )
