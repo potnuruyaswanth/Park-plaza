@@ -93,54 +93,6 @@
   line-height: 1.5;
 }
 
-.card-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-.selection-card .btn-primary {
-  width: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.selection-card .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-}
-
-.selection-card .btn-outline {
-  width: 100%;
-  background: transparent;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.selection-card .btn-outline:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-2px);
-}
-
-.divider-text {
-  color: var(--gray);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
 /* Selection Footer */
 .selection-footer {
   text-align: center;

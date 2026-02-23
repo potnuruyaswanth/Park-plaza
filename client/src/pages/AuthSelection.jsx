@@ -19,62 +19,24 @@ function AuthSelection() {
         {/* Selection Cards */}
         <div className="selection-grid">
           {/* User Option */}
-          <div className="selection-card user-card">
+          <div className="selection-card user-card" onClick={() => navigate('/user/login')}>
             <div className="card-icon">👤</div>
             <h2>User / Customer</h2>
             <p>Book parking, car wash & repair services</p>
-            <div className="card-buttons">
-              <button 
-                className="btn btn-primary"
-                onClick={() => navigate('/user/login')}
-              >
-                Login
-              </button>
-              <span className="divider-text">or</span>
-              <button 
-                className="btn btn-outline"
-                onClick={() => navigate('/user/register')}
-              >
-                Register
-              </button>
-            </div>
           </div>
 
           {/* Dealer Option */}
-          <div className="selection-card dealer-card">
+          <div className="selection-card dealer-card" onClick={() => navigate('/dealer/login')}>
             <div className="card-icon">🏢</div>
             <h2>Dealer / Showroom</h2>
             <p>Manage showroom and services</p>
-            <div className="card-buttons">
-              <button 
-                className="btn btn-primary"
-                onClick={() => navigate('/dealer/login')}
-              >
-                Login
-              </button>
-              <span className="divider-text">or</span>
-              <button 
-                className="btn btn-outline"
-                onClick={() => navigate('/dealer-registration')}
-              >
-                Register
-              </button>
-            </div>
           </div>
 
           {/* Admin Option */}
-          <div className="selection-card admin-card">
+          <div className="selection-card admin-card" onClick={() => navigate('/admin/login')}>
             <div className="card-icon">⚙️</div>
             <h2>Admin</h2>
             <p>System administration and control</p>
-            <div className="card-buttons">
-              <button 
-                className="btn btn-primary"
-                onClick={() => navigate('/admin/login')}
-              >
-                Login
-              </button>
-            </div>
           </div>
         </div>
 
