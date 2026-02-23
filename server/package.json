@@ -1,0 +1,34 @@
+{
+  "name": "park-plaza-server",
+  "version": "1.0.0",
+  "description": "Park Plaza - Vehicle Service Management Backend",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node seedData.js"
+  },
+  "keywords": [
+    "parking",
+    "vehicle",
+    "management",
+    "service"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "nodemailer": "^6.9.7",
+    "razorpay": "^2.9.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
