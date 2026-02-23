@@ -16,7 +16,7 @@ export default function Navbar() {
             className="btn btn-login-nav"
             onClick={() => navigate('/auth')}
           >
-            🔐 Login
+            🔐 Login / Register
           </button>
         </div>
       </div>
