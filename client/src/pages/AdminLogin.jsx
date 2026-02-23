@@ -98,9 +98,11 @@ function AdminLogin({ setUser }) {
           <Link to="/forgot-password" className="link">Forgot Password?</Link>
         </div>
 
-        {/* Back Link */}
-        <div className="back-link">
-          <Link to="/" className="link small">← Back to Login Options</Link>
+        {/* Back Links */}
+        <div className="back-links">
+          <Link to="/auth" className="link small">← Back to Login Options</Link>
+          <span className="link-divider">|</span>
+          <Link to="/" className="link small">🏠 Return to Home</Link>
         </div>
       </div>
     </div>

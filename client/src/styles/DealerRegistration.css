@@ -160,6 +160,29 @@
   cursor: not-allowed;
 }
 
+.btn-home {
+  flex: 1;
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-home:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .form-notice {
   background: #fef3c7;
   border-left: 4px solid #f59e0b;

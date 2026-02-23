@@ -324,14 +324,15 @@ function UserRegister() {
         </form>
 
         {/* Login Link */}
-        <div className="register-footer">
-          <p>Already have an account?</p>
-          <Link to="/user/login" className="link">Login here</Link>
+        <div className="registration-prompt">
+          <p>Already have an account? <Link to="/user/login" className="link-bold">Login here</Link></p>
         </div>
 
-        {/* Back Link */}
-        <div className="back-link">
-          <Link to="/" className="link small">← Back to Login Options</Link>
+        {/* Back Links */}
+        <div className="back-links">
+          <Link to="/auth" className="link small">← Back to Login Options</Link>
+          <span className="link-divider">|</span>
+          <Link to="/" className="link small">🏠 Return to Home</Link>
         </div>
       </div>
     </div>

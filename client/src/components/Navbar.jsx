@@ -7,22 +7,16 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-logo">
+        <div className="navbar-logo" onClick={() => navigate('/')}>
           <span className="logo-emoji">🚗</span>
           <span className="logo-text">Park Plaza</span>
         </div>
         <div className="navbar-buttons">
           <button 
-            className="btn btn-outline-nav"
+            className="btn btn-primary-nav"
             onClick={() => navigate('/auth')}
           >
-            🔐 Login
-          </button>
-          <button 
-            className="btn btn-primary-nav"
-            onClick={() => navigate('/user/register')}
-          >
-            📝 Register as User
+            🔐 Login / Register
           </button>
         </div>
       </div>

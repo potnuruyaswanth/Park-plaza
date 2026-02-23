@@ -8,6 +8,7 @@ function AuthSelection() {
 
   return (
     <div className="auth-selection">
+      <Navbar />
       <div className="selection-container">
         {/* Header */}
         <div className="selection-header">
@@ -18,48 +19,73 @@ function AuthSelection() {
         {/* Selection Cards */}
         <div className="selection-grid">
           {/* User Option */}
-          <div className="selection-card user-card" onClick={() => navigate('/user/login')}>
+          <div className="selection-card user-card">
             <div className="card-icon">👤</div>
-            <h2>User</h2>
-            <p>Customer account for booking services</p>
-            <button className="btn btn-primary">Access as User</button>
+            <h2>User / Customer</h2>
+            <p>Book parking, car wash & repair services</p>
+            <div className="card-buttons">
+              <button 
+                className="btn btn-primary"
+                onClick={() => navigate('/user/login')}
+              >
+                Login
+              </button>
+              <span className="divider-text">or</span>
+              <button 
+                className="btn btn-outline"
+                onClick={() => navigate('/user/register')}
+              >
+                Register
+              </button>
+            </div>
           </div>
 
           {/* Dealer Option */}
-          <div className="selection-card dealer-card" onClick={() => navigate('/dealer/login')}>
+          <div className="selection-card dealer-card">
             <div className="card-icon">🏢</div>
-            <h2>Dealer</h2>
+            <h2>Dealer / Showroom</h2>
             <p>Manage showroom and services</p>
-            <button className="btn btn-primary">Access as Dealer</button>
+            <div className="card-buttons">
+              <button 
+                className="btn btn-primary"
+                onClick={() => navigate('/dealer/login')}
+              >
+                Login
+              </button>
+              <span className="divider-text">or</span>
+              <button 
+                className="btn btn-outline"
+                onClick={() => navigate('/dealer-registration')}
+              >
+                Register
+              </button>
+            </div>
           </div>
 
           {/* Admin Option */}
-          <div className="selection-card admin-card" onClick={() => navigate('/admin/login')}>
+          <div className="selection-card admin-card">
             <div className="card-icon">⚙️</div>
             <h2>Admin</h2>
             <p>System administration and control</p>
-            <button className="btn btn-primary">Access as Admin</button>
+            <div className="card-buttons">
+              <button 
+                className="btn btn-primary"
+                onClick={() => navigate('/admin/login')}
+              >
+                Login
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Footer */}
         <div className="selection-footer">
-          <p>Don't have an account?</p>
-          <div className="footer-buttons">
-            <button
-              onClick={() => navigate('/user/register')}
-              className="btn btn-link"
-            >
-              Register as User
-            </button>
-            <span className="divider">or</span>
-            <button
-              onClick={() => navigate('/dealer-registration')}
-              className="btn btn-link btn-dealer"
-            >
-              Become a Dealer
-            </button>
-          </div>
+          <button
+            onClick={() => navigate('/')}
+            className="btn btn-home"
+          >
+            🏠 Return to Home
+          </button>
         </div>
       </div>
     </div>

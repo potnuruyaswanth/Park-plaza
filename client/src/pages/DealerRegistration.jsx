@@ -294,10 +294,18 @@ export default function DealerRegistration() {
             <button
               type="button"
               className="btn btn-cancel"
+              onClick={() => navigate('/auth')}
+              disabled={loading}
+            >
+              ← Back to Login Options
+            </button>
+            <button
+              type="button"
+              className="btn btn-home"
               onClick={() => navigate('/')}
               disabled={loading}
             >
-              ❌ Cancel
+              🏠 Return to Home
             </button>
           </div>
 

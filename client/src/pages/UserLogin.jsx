@@ -100,14 +100,15 @@ function UserLogin({ setUser }) {
         </div>
 
         {/* Register Link */}
-        <div className="login-footer">
-          <p>Don't have an account?</p>
-          <Link to="/user/register" className="link">Register here</Link>
+        <div className="registration-prompt">
+          <p>Don't have an account? <Link to="/user/register" className="link-bold">Register here</Link></p>
         </div>
 
-        {/* Back Link */}
-        <div className="back-link">
-          <Link to="/" className="link small">← Back to Login Options</Link>
+        {/* Back Links */}
+        <div className="back-links">
+          <Link to="/auth" className="link small">← Back to Login Options</Link>
+          <span className="link-divider">|</span>
+          <Link to="/" className="link small">🏠 Return to Home</Link>
         </div>
       </div>
     </div>
