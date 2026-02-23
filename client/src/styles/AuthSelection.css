@@ -1,0 +1,123 @@
+/* Auth Selection Page */
+.auth-selection {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  padding: 20px;
+}
+
+.selection-container {
+  width: 100%;
+  max-width: 1000px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.selection-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 60px;
+}
+
+.app-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.app-subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  opacity: 0.95;
+}
+
+/* Selection Grid */
+.selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.selection-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.selection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.selection-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.selection-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.selection-card h2 {
+  font-size: 1.8rem;
+  margin: 15px 0;
+  color: var(--dark);
+}
+
+.selection-card p {
+  color: var(--gray);
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* Selection Footer */
+.selection-footer {
+  text-align: center;
+  color: white;
+  padding-top: 40px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.selection-footer p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2.5rem;
+  }
+
+  .selection-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .selection-card {
+    padding: 30px 20px;
+  }
+}
