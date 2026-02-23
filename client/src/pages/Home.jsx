@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import '../styles/Home.css'
 
 export default function Home() {
@@ -110,6 +111,7 @@ export default function Home() {
 
   return (
     <div className="home-page">
+      <Navbar />
       {/* ====== HERO SECTION ====== */}
       <section className="hero-section">
         <div className="hero-content">
@@ -259,7 +261,7 @@ export default function Home() {
             </div>
             <button 
               className="btn btn-primary btn-large"
-              onClick={() => navigate('/dealer/login')}
+              onClick={() => navigate('/dealer-registration')}
             >
               👉 Register as Dealer
             </button>
@@ -327,7 +329,7 @@ export default function Home() {
           </button>
           <button 
             className="btn btn-secondary btn-large"
-            onClick={() => navigate('/dealer/login')}
+            onClick={() => navigate('/dealer-registration')}
           >
             👉 Get Started as Dealer
           </button>

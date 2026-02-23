@@ -103,7 +103,48 @@
 
 .selection-footer p {
   font-size: 1.1rem;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-link {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-link:hover {
+  background: white;
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-dealer {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-dealer:hover {
+  background: white;
+  color: var(--secondary);
+}
+
+.divider {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
 }
 
 /* Responsive */
@@ -119,5 +160,42 @@
 
   .selection-card {
     padding: 30px 20px;
+  }
+
+  .footer-buttons {
+    gap: 10px;
+  }
+
+  .btn-link {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+
+  .divider {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .selection-footer p {
+    font-size: 0.95rem;
+  }
+
+  .footer-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-link {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  .divider {
+    display: none;
   }
 }

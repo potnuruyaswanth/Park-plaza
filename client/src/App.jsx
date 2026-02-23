@@ -6,6 +6,7 @@ import UserLogin from './pages/UserLogin'
 import DealerLogin from './pages/DealerLogin'
 import AdminLogin from './pages/AdminLogin'
 import UserRegister from './pages/UserRegister'
+import DealerRegistration from './pages/DealerRegistration'
 import './styles/App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/dealer/login" element={<DealerLogin setUser={setUser} />} />
         <Route path="/admin/login" element={<AdminLogin setUser={setUser} />} />
         <Route path="/user/register" element={<UserRegister />} />
+        <Route path="/dealer-registration" element={<DealerRegistration />} />
       </Routes>
     </Router>
   )

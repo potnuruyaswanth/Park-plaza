@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import '../styles/AuthSelection.css'
 
 function AuthSelection() {
@@ -44,12 +45,21 @@ function AuthSelection() {
         {/* Footer */}
         <div className="selection-footer">
           <p>Don't have an account?</p>
-          <button
-            onClick={() => navigate('/user/register')}
-            className="btn btn-link"
-          >
-            Register as User
-          </button>
+          <div className="footer-buttons">
+            <button
+              onClick={() => navigate('/user/register')}
+              className="btn btn-link"
+            >
+              Register as User
+            </button>
+            <span className="divider">or</span>
+            <button
+              onClick={() => navigate('/dealer-registration')}
+              className="btn btn-link btn-dealer"
+            >
+              Become a Dealer
+            </button>
+          </div>
         </div>
       </div>
     </div>
