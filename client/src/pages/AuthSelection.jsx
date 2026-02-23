@@ -10,12 +10,6 @@ function AuthSelection() {
     <div className="auth-selection">
       <Navbar />
       <div className="selection-container">
-        {/* Header */}
-        <div className="selection-header">
-          <h1 className="app-title">🚗 Park Plaza</h1>
-          <p className="app-subtitle">Vehicle Management System</p>
-        </div>
-
         {/* Selection Cards */}
         <div className="selection-grid">
           {/* User Option */}
