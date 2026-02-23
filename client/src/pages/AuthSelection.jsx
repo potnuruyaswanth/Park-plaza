@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import '../styles/AuthSelection.css'
 
 function AuthSelection() {
@@ -8,7 +7,6 @@ function AuthSelection() {
 
   return (
     <div className="auth-selection">
-      <Navbar />
       <div className="selection-container">
         {/* Selection Cards */}
         <div className="selection-grid">
