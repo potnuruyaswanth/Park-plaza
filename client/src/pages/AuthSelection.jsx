@@ -40,6 +40,23 @@ function AuthSelection() {
           >
             🏠 Return to Home
           </button>
+          
+          <div className="registration-links">
+            <span>Don't have an account?</span>
+            <button
+              onClick={() => navigate('/user/register')}
+              className="link-btn"
+            >
+              Register as User
+            </button>
+            <span className="divider">|</span>
+            <button
+              onClick={() => navigate('/dealer-registration')}
+              className="link-btn"
+            >
+              Register as Dealer
+            </button>
+          </div>
         </div>
       </div>
     </div>

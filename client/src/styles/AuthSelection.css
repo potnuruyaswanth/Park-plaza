@@ -146,6 +146,38 @@
   transform: translateY(-2px);
 }
 
+/* Registration Links */
+.registration-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.link-btn:hover {
+  opacity: 0.8;
+}
+
+.registration-links .divider {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .app-title {
