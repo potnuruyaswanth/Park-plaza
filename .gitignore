@@ -1,6 +1,7 @@
 # Dependencies
-C:\Learning\WD\Park_plaza_2\client\node_modules\*
-node_modules/*
+
+/client/node_modules
+/server/node_modules
 npm-debug.log
 npm-error.log
 yarn-error.log
@@ -8,13 +9,10 @@ yarn-debug.log
 pnpm-lock.yaml
 
 # Environment variables (SENSITIVE - DO NOT COMMIT)
-.env
-.env.local
-.env.*.local
-.env.*.example
-.env.example.*
-.env.example
-
+/client/.env
+/client/.env.example
+/server/.env
+/server/.env.example
 
 # IDE & Editor
 .vscode/
