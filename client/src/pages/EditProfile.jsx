@@ -108,19 +108,19 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-6">Edit Profile</h1>
+    <div className="min-h-screen bg-gray-100 py-4 md:py-8">
+      <div className="max-w-2xl mx-auto px-3 md:px-4">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">Edit Profile</h1>
 
         <Card>
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4">
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4 text-sm">
               {success}
             </div>
           )}
@@ -147,7 +147,7 @@ const EditProfile = () => {
             />
 
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3">Address</h3>
+              <h3 className="text-base md:text-lg font-semibold mb-3">Address</h3>
               
               <Input
                 label="Street"
@@ -158,7 +158,7 @@ const EditProfile = () => {
                 placeholder="123 Main Street"
               />
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <Input
                   label="City"
                   type="text"
@@ -178,7 +178,7 @@ const EditProfile = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <Input
                   label="ZIP Code"
                   type="text"
@@ -199,7 +199,7 @@ const EditProfile = () => {
               </div>
             </div>
 
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 type="submit"
                 disabled={saving}
