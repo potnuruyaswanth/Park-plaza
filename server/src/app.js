@@ -18,8 +18,11 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       process.env.CLIENT_URL,
+      'https://park-plaza.vercel.app',
       'http://localhost:5173',
-      'http://localhost:3000'
+      'http://localhost:3000',
+      'http://127.0.0.1:5173',
+      'http://127.0.0.1:3000'
     ].filter(Boolean);
     
     // Allow requests with no origin (like mobile apps or Postman)
@@ -28,6 +31,7 @@ const corsOptions = {
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('CORS rejected origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
