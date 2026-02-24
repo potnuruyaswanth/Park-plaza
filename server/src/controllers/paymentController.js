@@ -4,10 +4,16 @@ import Booking from '../models/Booking.js';
 import PaymentAudit from '../models/PaymentAudit.js';
 import { BOOKING_STATUS } from '../config/constants.js';
 import { generateReceiptHTML } from '../utils/receiptGenerator.js';
-import puppeteer from 'puppeteer';
 import path from 'path';
 import fs from 'fs';
 import mongoose from 'mongoose';
+
+let puppeteer;
+try {
+  puppeteer = (await import('puppeteer')).default;
+} catch (e) {
+  puppeteer = null;
+}
 
 const ensureReceiptsDir = () => {
   const dir = path.join(process.cwd(), 'receipts');
@@ -60,21 +66,25 @@ export const recordCashPayment = async (req, res) => {
     });
     // Generate receipt PDF
     try {
-      const receiptsDir = ensureReceiptsDir();
-      const user = await (await import('../models/User.js')).default.findById(invoice.userId);
-      const showroom = await (await import('../models/Showroom.js')).default.findById(invoice.showroomId);
+      if (puppeteer) {
+        const receiptsDir = ensureReceiptsDir();
+        const user = await (await import('../models/User.js')).default.findById(invoice.userId);
+        const showroom = await (await import('../models/Showroom.js')).default.findById(invoice.showroomId);
 
-      const html = generateReceiptHTML({ payment, invoice, user, showroom });
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.setContent(html, { waitUntil: 'networkidle0' });
-      const fileName = `RCPT-${payment.transactionId}.pdf`;
-      const filePath = path.join(receiptsDir, fileName);
-      await page.pdf({ path: filePath, format: 'A4', margin: { top: '10mm', bottom: '10mm' } });
-      await browser.close();
+        const html = generateReceiptHTML({ payment, invoice, user, showroom });
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: 'networkidle0' });
+        const fileName = `RCPT-${payment.transactionId}.pdf`;
+        const filePath = path.join(receiptsDir, fileName);
+        await page.pdf({ path: filePath, format: 'A4', margin: { top: '10mm', bottom: '10mm' } });
+        await browser.close();
 
-      payment.receiptUrl = `/receipts/${fileName}`;
-      await payment.save();
+        payment.receiptUrl = `/receipts/${fileName}`;
+        await payment.save();
+      } else {
+        console.log('Puppeteer not available - receipt PDF generation skipped');
+      }
 
       // Save audit log
       await PaymentAudit.create({

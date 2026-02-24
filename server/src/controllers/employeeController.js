@@ -5,9 +5,15 @@ import User from '../models/User.js';
 import Payment from '../models/Payment.js';
 import { BOOKING_STATUS, INVOICE_STATUS, SERVICE_TYPE } from '../config/constants.js';
 import { generateInvoiceHTML } from '../utils/invoiceGenerator.js';
-import puppeteer from 'puppeteer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+let puppeteer;
+try {
+  puppeteer = (await import('puppeteer')).default;
+} catch (e) {
+  puppeteer = null;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -102,27 +108,31 @@ export const generateInvoice = async (req, res) => {
 
     // Generate PDF
     try {
-      const user = await User.findById(booking.userId._id);
-      const showroom = await Showroom.findById(booking.showroomId._id);
-      const employee = await User.findById(employeeId);
+      if (puppeteer) {
+        const user = await User.findById(booking.userId._id);
+        const showroom = await Showroom.findById(booking.showroomId._id);
+        const employee = await User.findById(employeeId);
 
-      const htmlContent = generateInvoiceHTML(invoice, booking, user, showroom, employee);
+        const htmlContent = generateInvoiceHTML(invoice, booking, user, showroom, employee);
 
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.setContent(htmlContent);
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(htmlContent);
 
-      const pdfPath = path.join(__dirname, `../../invoices/${invoice.invoiceNumber}.pdf`);
-      await page.pdf({
-        path: pdfPath,
-        format: 'A4',
-        margin: { top: 10, right: 10, bottom: 10, left: 10 }
-      });
+        const pdfPath = path.join(__dirname, `../../invoices/${invoice.invoiceNumber}.pdf`);
+        await page.pdf({
+          path: pdfPath,
+          format: 'A4',
+          margin: { top: 10, right: 10, bottom: 10, left: 10 }
+        });
 
-      await browser.close();
+        await browser.close();
 
-      invoice.pdfUrl = `/invoices/${invoice.invoiceNumber}.pdf`;
-      await invoice.save();
+        invoice.pdfUrl = `/invoices/${invoice.invoiceNumber}.pdf`;
+        await invoice.save();
+      } else {
+        console.log('Puppeteer not available - PDF generation skipped');
+      }
     } catch (pdfError) {
       console.log('PDF generation failed:', pdfError.message);
       // Continue without PDF
