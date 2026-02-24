@@ -1,4 +1,5 @@
 # Dependencies
+C:\Learning\WD\Park_plaza_2\client\node_modules\*
 node_modules/*
 npm-debug.log
 npm-error.log
@@ -10,8 +11,10 @@ pnpm-lock.yaml
 .env
 .env.local
 .env.*.local
-.env.example
+.env.*.example
 .env.example.*
+.env.example
+
 
 # IDE & Editor
 .vscode/
