@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { useAuth } from '../context/AuthContext';
 
 const Shop = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -54,6 +57,11 @@ const Shop = () => {
 
   const addToCart = async (productId) => {
     try {
+      if (!isAuthenticated) {
+        alert('Please login to add items to your cart');
+        navigate('/login');
+        return;
+      }
       await api.post('/cart/add', { productId, quantity: 1 });
       alert('Product added to cart!');
     } catch (err) {

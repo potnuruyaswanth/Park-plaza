@@ -101,6 +101,14 @@ const Navbar = () => {
                     My Bookings
                   </NavLink>
                   <NavLink 
+                    to="/cart"
+                    className={({ isActive }) => 
+                      `px-4 py-2 rounded-lg transition ${isActive ? 'bg-blue-700' : 'hover:bg-blue-700'}`
+                    }
+                  >
+                    🧺 My Cart
+                  </NavLink>
+                  <NavLink 
                     to="/payments/pending"
                     className={({ isActive }) => 
                       `px-4 py-2 rounded-lg transition ${isActive ? 'bg-blue-700' : 'hover:bg-blue-700'}`

@@ -127,13 +127,16 @@ const Dashboard = () => {
                 Search by City Name Instead
               </h3>
               <div className="flex gap-2">
-                <Input
-                  type="text"
-                  placeholder="Enter city name (e.g., Mumbai, Delhi, Bangalore)"
-                  value={manualCity}
-                  onChange={(e) => setManualCity(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && fetchShowroomsByCity()}
-                />
+                <div className="flex-1">
+                  <Input
+                    type="text"
+                    placeholder="Enter city name (e.g., Mumbai, Delhi, Bangalore)"
+                    value={manualCity}
+                    onChange={(e) => setManualCity(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && fetchShowroomsByCity()}
+                    className="py-3 text-base"
+                  />
+                </div>
                 <Button onClick={fetchShowroomsByCity} className="flex-shrink-0">
                   🔍 Search
                 </Button>

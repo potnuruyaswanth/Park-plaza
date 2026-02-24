@@ -14,6 +14,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
 import Shop from './pages/Shop';
+import Cart from './pages/Cart';
 import PendingPayments from './pages/PendingPayments';
 import MyBookings from './pages/MyBookings';
 import BookService from './pages/BookService';
@@ -46,6 +47,14 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/shop" element={<Shop />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute allowedRoles={['USER']}>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Protected User Routes */}
           <Route
